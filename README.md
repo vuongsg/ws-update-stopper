@@ -6,7 +6,7 @@ Click "Install" button to install stopping service tool. After that, log screen 
 
 Click "Refresh log", and you will see a green check tick, indicates that now Windows Update Service is turned off on your machine.
 
-![Alt text](https://github.com/vuongsg/caro-csharp/blob/master/screenshot.png?raw=true "Title")
+![Alt text](https://github.com/vuongsg/ws-updates-stopper/blob/master/screenshot.png?raw=true "Title")
 
 ## Functions
 - Install: install stopping service
