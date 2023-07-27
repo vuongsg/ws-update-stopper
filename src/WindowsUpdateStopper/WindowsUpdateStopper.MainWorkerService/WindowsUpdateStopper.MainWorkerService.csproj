@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-WindowsUpdateStopper.MainWorkerService-19E3E131-84AF-43B0-96A4-E9BEA16ED88A</UserSecretsId>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Authors>Vuong Nguyen</Authors>
+    <Company>Vuong Nguyen</Company>
+    <Copyright>Copyright © 2023 by Vuong Nguyen</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>  <!--also File version-->
+    <Version>1.0.0.0</Version>    <!--Product version-->
+    <Deterministic>False</Deterministic>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <Title>Windows Update Stopper Service</Title>
+    <Product>Windows Update Stopper Service</Product>
+    <DebugType>embedded</DebugType>
+    <!--<SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Out\Debug</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\Out\Release</OutputPath>
+  </PropertyGroup>
+
+  <!--add the pre-build event, named BeforeBuild in .NET Core:-->
+  <Target Name="SetAssemblyVersion" BeforeTargets="BeforeBuild">
+    <SetBuildNumber>
+      <Output TaskParameter="AssemblyVersion" PropertyName="AssemblyVersion" />
+      <Output TaskParameter="Version" PropertyName="Version" />
+    </SetBuildNumber>
+  </Target>
+  <!--and the task creating the AssemblyVersion-->
+  <UsingTask TaskName="SetBuildNumber" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <AssemblyVersion ParameterType="System.String" Output="true" />
+      <Version ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+  	  Log.LogMessage(MessageImportance.High, "Begin setting version number for project WindowsUpdateStopper.MainWorkerService");
+  	  
+      //major.minor.build-number.revision-number
+  	  //old style automatic build and version number
+  	  var now = DateTime.Now;
+      
+      //Get the revision number (number seconds (divided by two) into the day on which the compilation was performed)
+  	  var secondsSinceMidnightDivivedBy2 = (int)(now - now.Date).TotalSeconds / 2;
+      
+      //Get the build number (number of days since January 1, 2000)
+  	  var daysSinceJan1st2000 = (int)(now - new DateTime(2000, 1, 1)).TotalDays;
+  	  AssemblyVersion = Version = "1.0." + daysSinceJan1st2000 + "." + secondsSinceMidnightDivivedBy2;
+  
+  	  Log.LogMessage(MessageImportance.High, "File version is: " + AssemblyVersion);
+      Log.LogMessage(MessageImportance.High, "Product version is: " + Version);
+      Log.LogMessage(MessageImportance.High, "End setting version number for project WindowsUpdateStopper.MainWorkerService");
+  	]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WindowsUpdateStopper.Helpers\WindowsUpdateStopper.Helpers.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,94 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+:root, ::before, ::after {
+    box-sizing: border-box;
+    --white: #fff;
+    --black: #000;
+    --red: red;
+    --root-bg: #f0f0f0;
+    --widget-bg: #1165b9;
+    /*font-size: calc(0.6em + 1vw);*/
+    font-size: 17px;
+    font-family: sans-serif;
+    background-color: var(--root-bg);
+    line-height: 1.7; /*use unit-less for line-height*/
+}
+
+.main {
+    padding: 0.5rem;
+}
+
+.container {
+    display: flex;
+    background-color: var(--white);
+}
+
+.sidebar {
+    width: 30%;
+}
+
+.log-id {
+    width: 70%;
+    padding: 0.5em;
+    overflow: auto;
+    max-height: 65vh;  /*if not specifying height, when vertical scrollbar appears, it's screen's scrollbar, not log-id's vertical scrollbar*/
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .log-id {
+        width: 100%;
+    }
+
+    .widget {
+        width: 50%;
+        margin: 0 auto;
+        padding: .2em  .2em;
+    }
+}
+
+@media (max-width: 500px) {
+    .widget {
+        width: 100%;
+    }
+}
+
+.widget {
+    background-color: var(--widget-bg);
+    color: var(--white);
+    font-weight: bold;
+    margin: .8em  5em  1.2em  .5em;
+    padding: .5em  1.5em;
+    border-radius: .5em;
+    display: flex;
+    justify-content: left;  /*horizontal align*/
+    align-items: center;  /**vertical align*/
+}
+
+.widget:hover {
+    font-style: italic;
+    cursor: pointer;
+}
+
+.error-log {
+    font-weight: bold;
+    color: var(--red);
+}
+
+.info-log {
+    opacity: 0.8;
+}

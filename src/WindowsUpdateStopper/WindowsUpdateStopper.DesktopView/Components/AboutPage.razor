@@ -1,0 +1,58 @@
+﻿@page "/about-page"
+
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+        a:hover {
+            font-style: italic;
+        }
+
+    .container {
+        border-radius: .5em;
+    }
+
+    .img-div {
+        width: 40%;
+    }
+
+    .intro {
+        width: 60%;
+        padding: .5em;
+        opacity: 0.8;
+    }
+
+    @@media (max-width: 800px) {
+        .img-div {
+            width: 100%;
+        }
+
+        .intro {
+            width: 100%;
+        }
+    }
+</style>
+
+<div style="margin-bottom: 1em">
+    <a href="/" style="display:flex; justify-content: flex-end; align-items: center" @onclick="BackToIndex">
+        <img src="images/back.png" style="width: 4%; margin-right: .5em" />Back
+    </a>
+</div>
+
+<div class="container">
+    <div class="img-div">
+        <img src="images/haico.jpg" style="width: 100%" />
+    </div>
+
+    <div class="intro">
+        <h2>Windows Update Stopper</h2>
+        <p>Version: @Version</p>
+        <p>Copyright © 2023</p>
+        <p>I'm Vuong Nguyen, creator of this application. Enjoy yourself !</p>
+        <p>---------------------------------------------------</p>
+        <h3>How to use:</h3>
+        <p>If you haven't installed stopping service yet, please do it. Otherwise, you'll see a notification that it is already in your machine</p>
+    </div>
+</div>

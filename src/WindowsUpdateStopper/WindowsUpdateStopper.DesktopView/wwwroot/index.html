@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+    <div id="app" />
+    <script>
+        const LOG_ID_SCROLL = "logId-scroll";
+
+        function RestoreLogIdScroll() {
+            let top = localStorage.getItem(LOG_ID_SCROLL);
+            if (top !== null) {
+                let logId = document.querySelector(".log-id");
+                logId.scrollTop = parseFloat(top);
+            }
+        }
+
+        ///if top != null, set log-id.srollTop to be top.
+        ///Otherwise, store log-id.scrollTop as its current value
+        function SetLogIdScroll(top) {
+            if (top != null) {
+                localStorage.setItem(LOG_ID_SCROLL, top);
+            } else {
+                let logId = document.querySelector(".log-id");
+                localStorage.setItem(LOG_ID_SCROLL, logId.scrollTop);
+            }
+        }
+    </script>
+    <script src="_framework/blazor.webview.js"></script>
+</body>
+</html>
