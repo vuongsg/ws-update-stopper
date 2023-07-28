@@ -16,8 +16,11 @@ Click "Refresh log", and you will see a green check tick, indicates that now Win
 - Clear old logs: clear old log files
 - About: introduction
 
+## Use (for non-developers)
+You can download Release.zip, then run "Windows Update Stopper Dashboard.exe".
+
 ## Tech stack
 - C#
 - .NET 6
 - WPF
-- Blazor
+- Blazor Hybrid
