@@ -32,7 +32,15 @@ public partial class App : Application
 
 	protected override void OnExit(ExitEventArgs e)
 	{
-		mutex?.ReleaseMutex();
+		try
+		{
+			mutex?.ReleaseMutex();
+		}
+		catch
+		{
+			//exception: Object synchronization method was called from an unsynchronized block of code
+		}
+
 		base.OnExit(e);
 	}
 }

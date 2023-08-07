@@ -2,53 +2,61 @@
 @using WindowsUpdateStopper.Helpers;
 
 <style>
+    .widget span.photo {
+        width: 40%;
+    }
+
     .widget span img {
         width: 50%;
+    }
+
+    .widget span.caption {
+        width: 60%;
     }
 </style>
 
 <div class="container">
     <aside class="sidebar">
         <div class="widget" @onclick="InstallService">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/install.png" />
             </span>
             <span style="width: 60%">Install</span>
         </div>
 
         <div class="widget" @onclick="UninstallService">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/uninstall.png" />
             </span>
-            <span style="width: 60%">Uninstall</span>
+            <span class="caption">Uninstall</span>
         </div>
 
         <div class="widget" style="background-color: lightgray;" @onclick="RefreshLog">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/refresh.png" />
             </span>
-            <span style="width: 60%">Refresh log</span>
+            <span class="caption">Refresh log</span>
         </div>
 
         <div class="widget" style="background-color: lightgray;" @onclick="LoadLog">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/load.png" />
             </span>
-            <span style="width: 60%">Load log</span>
+            <span class="caption">Load log</span>
         </div>
 
         <div class="widget" style="background-color: lightgray;" @onclick="ClearOldLogs">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/erase.png" />
             </span>
-            <span style="width: 60%">Clear old logs</span>
+            <span class="caption">Clear old logs</span>
         </div>
 
         <div class="widget" @onclick="GoToAboutPage">
-            <span style="width: 40%">
+            <span class="photo">
                 <img src="images/author.png" />
             </span>
-            <span style="width: 60%">About</span>
+            <span class="caption">About</span>
         </div>
     </aside>
 
